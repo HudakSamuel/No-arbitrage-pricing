@@ -1,31 +1,51 @@
 package sk.stu.fei.project;
 
+import sk.stu.fei.project.domain.AssetMovement;
 import sk.stu.fei.project.domain.AssetTree;
 import sk.stu.fei.project.domain.binary_tree.average_price.AveragePriceBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.average_price.CallAverageBinaryTree;
+import sk.stu.fei.project.domain.binary_tree.average_price.PutAverageBinaryTree;
 import sk.stu.fei.project.service.AssetBinaryTreeImpl;
 import sk.stu.fei.project.service.AssetBinaryTreeService;
+import sk.stu.fei.project.service.asset_movement.AssetMovementImpl;
+import sk.stu.fei.project.service.asset_movement.AssetMovementService;
+import sk.stu.fei.project.service.binary_tree_builder.average_price_builder.AveragePriceBinaryTreeImpl;
+import sk.stu.fei.project.service.binary_tree_builder.average_price_builder.AveragePriceBinaryTreeService;
 import sk.stu.fei.project.service.tree_printer.AssetTreePrinter;
 import sk.stu.fei.project.service.tree_printer.OptionTreePrinter;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 public class Main{
     public static void main(String[] args) throws IOException {
-        AssetTree assetTree = new AssetTree(0.1, new BigDecimal(110),3, 3, 0.1);
+        AssetMovementService assetMovementService = new AssetMovementImpl();
         AssetBinaryTreeService assetBinaryTreeService = new AssetBinaryTreeImpl();
-        assetBinaryTreeService.buildTree(assetTree);
-
+        AveragePriceBinaryTreeService averagePriceBinaryTreeService = new AveragePriceBinaryTreeImpl();
         AssetTreePrinter<AssetTree> assetTreePrinter = new AssetTreePrinter<AssetTree>();
-        assetTreePrinter.print(assetTree);
-
-        AveragePriceBinaryTree averagePriceBinaryTree = new CallAverageBinaryTree(assetTree, new BigDecimal(110));
         OptionTreePrinter optionTreePrinter = new OptionTreePrinter();
 
-        averagePriceBinaryTree.buildAverageBinaryTree();
-        optionTreePrinter.print(averagePriceBinaryTree);
-        System.out.println(averagePriceBinaryTree.getRoot().value);
+        AssetMovement assetMovement = new AssetMovement(0.1, 3, 0.1, 3);
+
+        if (assetMovementService.initAssetMovementParameters(assetMovement)){
+            AssetTree assetTree = new AssetTree(new BigDecimal(110), assetMovement);
+            assetBinaryTreeService.buildTree(assetTree);
+
+
+            assetTreePrinter.print(assetTree);
+
+            CallAverageBinaryTree callAverageBinaryTree = new CallAverageBinaryTree(new BigDecimal(110));
+            PutAverageBinaryTree putAverageBinaryTree = new PutAverageBinaryTree(new BigDecimal(110));
+
+            averagePriceBinaryTreeService.buildCallAveragePriceBinaryTree(callAverageBinaryTree, assetTree);
+            averagePriceBinaryTreeService.buildPutAveragePriceBinaryTree(putAverageBinaryTree, assetTree);
+
+            optionTreePrinter.print(callAverageBinaryTree);
+            System.out.println();
+            optionTreePrinter.print(putAverageBinaryTree);
+        }
+
 
     }
 }

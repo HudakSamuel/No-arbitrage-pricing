@@ -9,21 +9,10 @@ import java.math.BigDecimal;
 public class AssetTree{
 
     private Node root;
-    private double volatility;
-    private double timePeriod;
-    private int steps;
-    private double interest;
-    @Setter
-    private double probability;
+    private AssetMovement assetMovement;
 
-
-
-    public AssetTree(double volatility, BigDecimal currentAssetValue, double timePeriod, int steps, double interest){
-        this.root = new Node();
-        this.volatility = volatility;
-        this.root.value = currentAssetValue;
-        this.timePeriod = timePeriod;
-        this.steps = steps;
-        this.interest = interest;
+    public AssetTree(BigDecimal currentValue, AssetMovement assetMovement){
+        this.root = new Node(currentValue);
+        this.assetMovement = assetMovement;
     }
 }
