@@ -6,6 +6,7 @@ import sk.stu.fei.project.domain.binary_tree.OptionBinaryTree;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class OptionTreePrinter extends TreePrinter{
 

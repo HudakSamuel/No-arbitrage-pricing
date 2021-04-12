@@ -2,7 +2,6 @@ package sk.stu.fei.project.service.asset_movement;
 
 import lombok.NonNull;
 import sk.stu.fei.project.domain.AssetMovement;
-import sk.stu.fei.project.domain.AssetTree;
 
 public class AssetMovementImpl implements AssetMovementService{
     java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());

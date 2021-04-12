@@ -1,7 +1,6 @@
 package sk.stu.fei.project.domain.binary_tree;
 
 import lombok.Getter;
-import sk.stu.fei.project.domain.AssetTree;
 import sk.stu.fei.project.domain.Node;
 
 import java.math.BigDecimal;
