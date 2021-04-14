@@ -6,6 +6,8 @@ import sk.stu.fei.project.domain.AssetTree;
 import sk.stu.fei.project.domain.binary_tree.average_price.AveragePriceBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.average_price.CallAverageBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.average_price.PutAverageBinaryTree;
+import sk.stu.fei.project.domain.binary_tree.lookback.fixed_lookback.CallFixedLookbackBinaryTree;
+import sk.stu.fei.project.domain.binary_tree.lookback.fixed_lookback.PutFixedLookbackBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.CallFloatingLookbackBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.FloatingLookbackBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.PutFloatingLookbackBinaryTree;
@@ -15,6 +17,8 @@ import sk.stu.fei.project.service.asset_movement.AssetMovementImpl;
 import sk.stu.fei.project.service.asset_movement.AssetMovementService;
 import sk.stu.fei.project.service.binary_tree_builder.average_price_builder.AveragePriceBinaryTreeImpl;
 import sk.stu.fei.project.service.binary_tree_builder.average_price_builder.AveragePriceBinaryTreeService;
+import sk.stu.fei.project.service.binary_tree_builder.fixed_lookback_builder.FixedLookbackBinaryTreeImpl;
+import sk.stu.fei.project.service.binary_tree_builder.fixed_lookback_builder.FixedLookbackBinaryTreeService;
 import sk.stu.fei.project.service.binary_tree_builder.floating_lookback_builder.FloatingLookbackBinaryTreeImpl;
 import sk.stu.fei.project.service.binary_tree_builder.floating_lookback_builder.FloatingLookbackBinaryTreeService;
 import sk.stu.fei.project.service.tree_printer.AssetTreePrinter;
@@ -32,6 +36,7 @@ public class Main{
         AssetTreePrinter<AssetTree> assetTreePrinter = new AssetTreePrinter<AssetTree>();
         OptionTreePrinter optionTreePrinter = new OptionTreePrinter();
         FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
+        FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
 
         AssetMovement assetMovement = new AssetMovement(0.1, 3, 0.01, 3);
 
@@ -43,16 +48,26 @@ public class Main{
             assetTreePrinter.print(assetTree);
 
             // FLOATING LOOKBACK //
-            CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
-            PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
+//            CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
+//            PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
+//
+//            floatingLookbackBinaryTreeService.buildCallFloatingLookbackBinaryTree(callFloatingLookbackBinaryTree, assetTree);
+//            floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
+//
+//            optionTreePrinter.print(callFloatingLookbackBinaryTree);
+//            System.out.println();
+//            optionTreePrinter.print(putFloatingLookbackBinaryTree);
 
-            floatingLookbackBinaryTreeService.buildCallFloatingLookbackBinaryTree(callFloatingLookbackBinaryTree, assetTree);
-            floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
+            // FIXED LOOKBACK //
+            CallFixedLookbackBinaryTree callFixedLookbackBinaryTree = new CallFixedLookbackBinaryTree(new BigDecimal(110));
+            PutFixedLookbackBinaryTree putFixedLookbackBinaryTree = new PutFixedLookbackBinaryTree(new BigDecimal(110));
 
-            optionTreePrinter.print(callFloatingLookbackBinaryTree);
+            fixedLookbackBinaryTreeService.buildCallFixedLookbackBinaryTree(callFixedLookbackBinaryTree, assetTree);
+            fixedLookbackBinaryTreeService.buildPutFixedLookbackBinaryTree(putFixedLookbackBinaryTree, assetTree);
+
+            optionTreePrinter.print(callFixedLookbackBinaryTree);
             System.out.println();
-            optionTreePrinter.print(putFloatingLookbackBinaryTree);
-
+            optionTreePrinter.print(putFixedLookbackBinaryTree);
 
             // AVERAGE LOOKBACK //
 //            CallAverageBinaryTree callAverageBinaryTree = new CallAverageBinaryTree(new BigDecimal(110));
