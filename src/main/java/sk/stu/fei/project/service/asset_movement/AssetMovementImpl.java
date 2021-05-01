@@ -16,13 +16,17 @@ public class AssetMovementImpl implements AssetMovementService{
             return true;
         }
 
-        logger.severe("Arbitrage condition is not met");
+        logger.severe("No-arbitrage condition is not met");
         return false;
     }
 
     private boolean isArbitrageConditionMet(AssetMovement assetMovement){
+        boolean firstPart = (-assetMovement.volatility) < (assetMovement.interest * Math.sqrt(assetMovement.T));
+        boolean secondPart = (assetMovement.interest * Math.sqrt(assetMovement.T)) < (assetMovement.volatility);
+        logger.info(String.valueOf(firstPart));
+        logger.info(String.valueOf(secondPart));
 
-        return true;
+        return firstPart && secondPart;
     }
 
     private void createAndSetT(AssetMovement assetMovement){
