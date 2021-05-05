@@ -22,17 +22,17 @@ public abstract class BinaryTreeImpl implements BinaryTreeService {
         }
     }
 
-    protected BigDecimal calculateNodeValue(Node current, AssetMovement assetMovement){
-        BigDecimal nodeValueUp = current.left.value;
-        BigDecimal nodeValueDown = current.right.value;
-        BigDecimal probabilityUp = BigDecimal.valueOf(assetMovement.probability);
-        BigDecimal probabilityDown = new BigDecimal(1).subtract(BigDecimal.valueOf(assetMovement.probability));
+    protected void calculateNodeValue(Node current, AssetMovement assetMovement){
+//        BigDecimal nodeValueUp = current.left.value;
+//        BigDecimal nodeValueDown = current.right.value;
+//        BigDecimal probabilityUp = BigDecimal.valueOf(assetMovement.probability);
+//        BigDecimal probabilityDown = new BigDecimal(1).subtract(BigDecimal.valueOf(assetMovement.probability));
+//
+//        BigDecimal firstPart = BigDecimal.valueOf(Math.exp(- assetMovement.interest * assetMovement.T));
+//        BigDecimal secondPart = nodeValueUp.multiply(probabilityUp);
+//        BigDecimal thirdPart = probabilityDown.multiply(nodeValueDown);
+//        BigDecimal result = firstPart.multiply((secondPart.add(thirdPart)));
 
-        BigDecimal firstPart = BigDecimal.valueOf(Math.exp(- assetMovement.interest * assetMovement.T));
-        BigDecimal secondPart = nodeValueUp.multiply(probabilityUp);
-        BigDecimal thirdPart = probabilityDown.multiply(nodeValueDown);
-        BigDecimal result = firstPart.multiply((secondPart.add(thirdPart)));
-
-        return result;
+        //return result;
     }
 }

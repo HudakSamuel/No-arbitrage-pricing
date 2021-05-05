@@ -86,7 +86,7 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
         MathContext precision = new MathContext(4);
 
         for(Node child : nodesToPrint){
-            System.out.print(child.value.round(precision) + "  ");
+            System.out.print(child.value + "  ");
         }
 
     }

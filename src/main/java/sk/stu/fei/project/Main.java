@@ -31,24 +31,24 @@ import java.math.BigDecimal;
 
 public class Main{
     public static void main(String[] args) throws IOException {
-        Init init = new Init();
-        init.init();
-//        AssetMovementService assetMovementService = new AssetMovementImpl();
-//        AssetBinaryTreeService assetBinaryTreeService = new AssetBinaryTreeImpl();
-//        AveragePriceBinaryTreeService averagePriceBinaryTreeService = new AveragePriceBinaryTreeImpl();
-//        AssetTreePrinter<AssetTree> assetTreePrinter = new AssetTreePrinter<AssetTree>();
-//        OptionTreePrinter optionTreePrinter = new OptionTreePrinter();
-//        FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
-//        FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
+//        Init init = new Init();
+//        init.init();
+        AssetMovementService assetMovementService = new AssetMovementImpl();
+        AssetBinaryTreeService assetBinaryTreeService = new AssetBinaryTreeImpl();
+        AveragePriceBinaryTreeService averagePriceBinaryTreeService = new AveragePriceBinaryTreeImpl();
+        AssetTreePrinter<AssetTree> assetTreePrinter = new AssetTreePrinter<AssetTree>();
+        OptionTreePrinter optionTreePrinter = new OptionTreePrinter();
+        FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
+        FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
+
+       AssetMovement assetMovement = new AssetMovement(new BigDecimal("0.1"), new BigDecimal("4"), new BigDecimal("0.01"), 4);
+
+        if (assetMovementService.initAssetMovementParameters(assetMovement)) {
+            AssetTree assetTree = new AssetTree(new BigDecimal("110"), assetMovement);
+            assetBinaryTreeService.buildTree(assetTree);
 //
-//       AssetMovement assetMovement = new AssetMovement(0.1, 1/365, 0.01, 21);
 //
-//        if (assetMovementService.initAssetMovementParameters(assetMovement)){
-//            AssetTree assetTree = new AssetTree(new BigDecimal(110), assetMovement);
-//            assetBinaryTreeService.buildTree(assetTree);
-//
-//
-//            assetTreePrinter.print(assetTree);
+            assetTreePrinter.print(assetTree);
 //
 //            // FLOATING LOOKBACK //
 ////            CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
@@ -86,6 +86,6 @@ public class Main{
 //            //optionTreePrinter.print(putAverageBinaryTree);
 //        }
 
-
+        }
     }
 }

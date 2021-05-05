@@ -7,6 +7,7 @@ import sk.stu.fei.project.domain.Node;
 import sk.stu.fei.project.service.utility.BigDecimalComparator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class AssetBinaryTreeImpl implements AssetBinaryTreeService{
     }
 
     private void createValueAndAddNodeRecursive(Node current, int depth, AssetMovement assetMovement){
-        BigDecimal nodeUpValue = current.value.multiply(BigDecimal.valueOf(assetMovement.up));
-        BigDecimal nodeDownValue = current.value.multiply(BigDecimal.valueOf(assetMovement.down));
+        BigDecimal nodeUpValue = current.value.multiply(assetMovement.up);
+        BigDecimal nodeDownValue = current.value.multiply(assetMovement.down);
 
         Node nodeUp = addNode(current, nodeUpValue);
         Node nodeDown = addNode(current, nodeDownValue);

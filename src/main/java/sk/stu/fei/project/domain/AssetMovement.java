@@ -1,17 +1,19 @@
 package sk.stu.fei.project.domain;
 
+import java.math.BigDecimal;
+
 public class AssetMovement {
-    public double up;
-    public double down;
-    public double probability;
-    public double T;
+    public BigDecimal up;
+    public BigDecimal down;
+    public BigDecimal probability;
+    public BigDecimal T;
 
-    public double volatility;
-    public double timePeriod;
+    public BigDecimal volatility;
+    public BigDecimal timePeriod;
     public int steps;
-    public double interest;
+    public BigDecimal interest;
 
-    public AssetMovement(double volatility, double timePeriod, double interest, int steps){
+    public AssetMovement(BigDecimal volatility, BigDecimal timePeriod, BigDecimal interest, int steps){
         this.volatility = volatility;
         this.timePeriod = timePeriod;
         this.interest = interest;

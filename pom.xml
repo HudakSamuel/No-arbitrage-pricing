@@ -32,6 +32,12 @@
             <artifactId>jline</artifactId>
             <version>2.14.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>ch.obermuhlner</groupId>
+            <artifactId>big-math</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 
 
