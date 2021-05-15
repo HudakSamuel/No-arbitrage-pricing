@@ -6,6 +6,7 @@ import sk.stu.fei.project.service.utility.BigDecimalComparator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.LinkedHashSet;
 
 public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
@@ -83,10 +84,10 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
     }
 
     private void printNodeValues(LinkedHashSet<Node> nodesToPrint){
-        MathContext precision = new MathContext(4);
 
         for(Node child : nodesToPrint){
-            System.out.print(child.value + "  ");
+            BigDecimal value = child.value.setScale(2, RoundingMode.HALF_EVEN);
+            System.out.print(value + "  ");
         }
 
     }

@@ -41,7 +41,7 @@ public class Main{
         FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
         FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
 
-       AssetMovement assetMovement = new AssetMovement(new BigDecimal("0.1"), new BigDecimal("3"), new BigDecimal("0.1"), 3);
+       AssetMovement assetMovement = new AssetMovement(new BigDecimal("1"), new BigDecimal("1"), new BigDecimal("0.5"), 3);
 
         if (assetMovementService.initAssetMovementParameters(assetMovement)) {
             AssetTree assetTree = new AssetTree(new BigDecimal("110"), assetMovement);
@@ -49,43 +49,43 @@ public class Main{
 
 
             assetTreePrinter.print(assetTree);
-//
-//            // FLOATING LOOKBACK //
+
+             // FLOATING LOOKBACK //
             CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
-            //PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
+            PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
 
             floatingLookbackBinaryTreeService.buildCallFloatingLookbackBinaryTree(callFloatingLookbackBinaryTree, assetTree);
-            //floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
+            floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
 
             optionTreePrinter.print(callFloatingLookbackBinaryTree);
             System.out.println();
-            //optionTreePrinter.print(putFloatingLookbackBinaryTree);
-//
-//            // FIXED LOOKBACK //
-////            CallFixedLookbackBinaryTree callFixedLookbackBinaryTree = new CallFixedLookbackBinaryTree(new BigDecimal(110));
-////            PutFixedLookbackBinaryTree putFixedLookbackBinaryTree = new PutFixedLookbackBinaryTree(new BigDecimal(110));
-////
-////            fixedLookbackBinaryTreeService.buildCallFixedLookbackBinaryTree(callFixedLookbackBinaryTree, assetTree);
-////            fixedLookbackBinaryTreeService.buildPutFixedLookbackBinaryTree(putFixedLookbackBinaryTree, assetTree);
-////
-////            optionTreePrinter.print(callFixedLookbackBinaryTree);
-////            System.out.println();
-////            optionTreePrinter.print(putFixedLookbackBinaryTree);
-//
-//            // AVERAGE LOOKBACK //
-//            CallAverageBinaryTree callAverageBinaryTree = new CallAverageBinaryTree(new BigDecimal(110));
-//            PutAverageBinaryTree putAverageBinaryTree = new PutAverageBinaryTree(new BigDecimal(110));
-//
-//            averagePriceBinaryTreeService.buildCallAveragePriceBinaryTree(callAverageBinaryTree, assetTree);
-//            averagePriceBinaryTreeService.buildPutAveragePriceBinaryTree(putAverageBinaryTree, assetTree);
-//
-//            //optionTreePrinter.print(callAverageBinaryTree);
-//            System.out.println(callAverageBinaryTree.getRoot().value);
-//            System.out.println(putAverageBinaryTree.getRoot().value);
-//
-//            //optionTreePrinter.print(putAverageBinaryTree);
-//        }
+            optionTreePrinter.print(putFloatingLookbackBinaryTree);
 
+            // FIXED LOOKBACK //
+            CallFixedLookbackBinaryTree callFixedLookbackBinaryTree = new CallFixedLookbackBinaryTree(new BigDecimal(110));
+            PutFixedLookbackBinaryTree putFixedLookbackBinaryTree = new PutFixedLookbackBinaryTree(new BigDecimal(110));
+
+            fixedLookbackBinaryTreeService.buildCallFixedLookbackBinaryTree(callFixedLookbackBinaryTree, assetTree);
+            fixedLookbackBinaryTreeService.buildPutFixedLookbackBinaryTree(putFixedLookbackBinaryTree, assetTree);
+
+            optionTreePrinter.print(callFixedLookbackBinaryTree);
+            System.out.println();
+            optionTreePrinter.print(putFixedLookbackBinaryTree);
+
+            // AVERAGE LOOKBACK //
+            CallAverageBinaryTree callAverageBinaryTree = new CallAverageBinaryTree(new BigDecimal(110));
+            PutAverageBinaryTree putAverageBinaryTree = new PutAverageBinaryTree(new BigDecimal(110));
+
+            averagePriceBinaryTreeService.buildCallAveragePriceBinaryTree(callAverageBinaryTree, assetTree);
+            averagePriceBinaryTreeService.buildPutAveragePriceBinaryTree(putAverageBinaryTree, assetTree);
+
+            optionTreePrinter.print(callAverageBinaryTree);
+            System.out.println(callAverageBinaryTree.getRoot().value);
+            System.out.println(putAverageBinaryTree.getRoot().value);
+
+            optionTreePrinter.print(putAverageBinaryTree);
         }
+
+
     }
 }

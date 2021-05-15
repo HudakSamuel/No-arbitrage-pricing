@@ -40,7 +40,7 @@ public class AssetMovementImpl implements AssetMovementService{
     }
 
     private void createAndSetT(AssetMovement assetMovement){
-        assetMovement.T = assetMovement.timePeriod.divide(BigDecimal.valueOf(assetMovement.steps), RoundingMode.HALF_EVEN);
+        assetMovement.T = assetMovement.timePeriod.divide(BigDecimal.valueOf(assetMovement.steps), precision);
     }
 
     private void createAndSetUpAndDownModifiers(AssetMovement assetMovement){

@@ -5,6 +5,7 @@ import sk.stu.fei.project.domain.binary_tree.OptionBinaryTree;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
@@ -31,11 +32,11 @@ public class OptionTreePrinter extends TreePrinter{
         }
     }
     private void printNodeValue(Node current) throws IOException {
-        MathContext m = new MathContext(3);
         if (current.value == null) {
             output.write("<null>");
         } else {
-            output.write(current.value.round(m).toString());
+            BigDecimal value = current.value.setScale(2, RoundingMode.HALF_EVEN);
+            output.write(value.toString());
         }
         output.write('\n');
     }
