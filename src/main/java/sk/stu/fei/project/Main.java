@@ -41,7 +41,7 @@ public class Main{
         FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
         FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
 
-       AssetMovement assetMovement = new AssetMovement(new BigDecimal("0.1"), new BigDecimal("4"), new BigDecimal("0.01"), 4);
+       AssetMovement assetMovement = new AssetMovement(new BigDecimal("1"), new BigDecimal("3"), new BigDecimal("0.1"), 3);
 
         if (assetMovementService.initAssetMovementParameters(assetMovement)) {
             AssetTree assetTree = new AssetTree(new BigDecimal("110"), assetMovement);
