@@ -29,13 +29,7 @@ public class AssetMovementImpl implements AssetMovementService{
     }
 
     private boolean isArbitrageConditionMet(AssetMovement assetMovement){
-//        boolean firstPart = (-assetMovement.volatility) < (assetMovement.interest * Math.sqrt(assetMovement.T));
-//        boolean secondPart = (assetMovement.interest * Math.sqrt(assetMovement.T)) < (assetMovement.volatility);
-//        logger.info(String.valueOf(firstPart));
-//        logger.info(String.valueOf(secondPart));
 
-//
-//        return firstPart && secondPart;
         BigDecimal vol = BigDecimal.ZERO.subtract(assetMovement.volatility);
         boolean firstPart = bigDecimalComparator.isValueSmallerThanCurrent(vol, assetMovement.interest.multiply(BigDecimalMath.sqrt(assetMovement.T, precision)));
         boolean secondPart = bigDecimalComparator.isValueSmallerThanCurrent(assetMovement.interest.multiply(BigDecimalMath.sqrt(assetMovement.T, precision)), assetMovement.volatility);

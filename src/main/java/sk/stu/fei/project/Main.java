@@ -41,25 +41,25 @@ public class Main{
         FloatingLookbackBinaryTreeService floatingLookbackBinaryTreeService = new FloatingLookbackBinaryTreeImpl();
         FixedLookbackBinaryTreeService fixedLookbackBinaryTreeService = new FixedLookbackBinaryTreeImpl();
 
-       AssetMovement assetMovement = new AssetMovement(new BigDecimal("1"), new BigDecimal("3"), new BigDecimal("0.1"), 3);
+       AssetMovement assetMovement = new AssetMovement(new BigDecimal("0.1"), new BigDecimal("3"), new BigDecimal("0.1"), 3);
 
         if (assetMovementService.initAssetMovementParameters(assetMovement)) {
             AssetTree assetTree = new AssetTree(new BigDecimal("110"), assetMovement);
             assetBinaryTreeService.buildTree(assetTree);
-//
-//
+
+
             assetTreePrinter.print(assetTree);
 //
 //            // FLOATING LOOKBACK //
-////            CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
-////            PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
-////
-////            floatingLookbackBinaryTreeService.buildCallFloatingLookbackBinaryTree(callFloatingLookbackBinaryTree, assetTree);
-////            floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
-////
-////            optionTreePrinter.print(callFloatingLookbackBinaryTree);
-////            System.out.println();
-////            optionTreePrinter.print(putFloatingLookbackBinaryTree);
+            CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree = new CallFloatingLookbackBinaryTree();
+            //PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree = new PutFloatingLookbackBinaryTree();
+
+            floatingLookbackBinaryTreeService.buildCallFloatingLookbackBinaryTree(callFloatingLookbackBinaryTree, assetTree);
+            //floatingLookbackBinaryTreeService.buildPutFloatingLookbackBinaryTree(putFloatingLookbackBinaryTree, assetTree);
+
+            optionTreePrinter.print(callFloatingLookbackBinaryTree);
+            System.out.println();
+            //optionTreePrinter.print(putFloatingLookbackBinaryTree);
 //
 //            // FIXED LOOKBACK //
 ////            CallFixedLookbackBinaryTree callFixedLookbackBinaryTree = new CallFixedLookbackBinaryTree(new BigDecimal(110));

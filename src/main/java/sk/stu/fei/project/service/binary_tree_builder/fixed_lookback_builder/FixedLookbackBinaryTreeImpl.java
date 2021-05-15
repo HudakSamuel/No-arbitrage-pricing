@@ -73,7 +73,7 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
 
         createNodeValuesRecursive(current.left, queue, assetMovement);
         createNodeValuesRecursive(current.right, queue, assetMovement);
-        //current.value = super.calculateNodeValue(current, assetMovement);
+        current.value = super.calculateNodeValue(current, assetMovement);
     }
 
 

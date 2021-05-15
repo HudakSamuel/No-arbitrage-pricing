@@ -72,7 +72,7 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
 
         createNodeValuesRecursive(current.left, queue, assetMovement);
         createNodeValuesRecursive(current.right, queue, assetMovement);
-        //current.value = super.calculateNodeValue(current, assetMovement);
+        current.value = super.calculateNodeValue(current, assetMovement);
 
     }
 

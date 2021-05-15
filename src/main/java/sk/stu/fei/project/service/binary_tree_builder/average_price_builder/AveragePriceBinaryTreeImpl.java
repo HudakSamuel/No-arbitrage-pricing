@@ -40,7 +40,7 @@ public class AveragePriceBinaryTreeImpl extends BinaryTreeImpl implements Averag
 
         createCallNodeValuesRecursive(current.left, queue, strikePrice, assetMovement);
         createCallNodeValuesRecursive(current.right, queue, strikePrice, assetMovement);
-        //current.value = super.calculateNodeValue(current, assetMovement);
+        current.value = super.calculateNodeValue(current, assetMovement);
 
     }
 
@@ -61,7 +61,7 @@ public class AveragePriceBinaryTreeImpl extends BinaryTreeImpl implements Averag
 
         createPutNodeValuesRecursive(current.left, queue, strikePrice, assetMovement);
         createPutNodeValuesRecursive(current.right, queue, strikePrice, assetMovement);
-        //current.value = super.calculateNodeValue(current, assetMovement);
+        current.value = super.calculateNodeValue(current, assetMovement);
     }
 
 
