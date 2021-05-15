@@ -5,7 +5,6 @@ import sk.stu.fei.project.domain.Node;
 import sk.stu.fei.project.service.utility.BigDecimalComparator;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.LinkedHashSet;
 
@@ -13,8 +12,8 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
 
     private BigDecimalComparator bigDecimalComparator;
     private final int nSPACES = 100;
-    private final int spaceBetweenRoadJunction = 3;
-    private final int spaceAfterRoadJunction = 2;
+    private int spaceBetweenRoadJunction = 3;
+    private int spaceAfterRoadJunction = 2;
 
     public AssetTreePrinter() {
         this.bigDecimalComparator = new BigDecimalComparator();
@@ -23,6 +22,7 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
     public void print(AssetTree assetTree){
         LinkedHashSet<Node> nodesToPrint = new LinkedHashSet<Node>();
         nodesToPrint.add(assetTree.getRoot());
+        //determineSpaceAfterRoadJunction(assetTree.getRoot().value);
 
         printNodesRecursive(nodesToPrint, nSPACES);
     }
@@ -52,7 +52,10 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
         System.out.println();
 
         printEmptySpace(spaces - 1);
-        printRoadJunctions(nodesToPrint.size());
+
+        if(!checkIfLastChildren(nodesToPrint)){
+            printRoadJunctions(nodesToPrint.size());
+        }
         System.out.println();
     }
 
@@ -103,16 +106,27 @@ public class AssetTreePrinter<T extends AssetTree> extends TreePrinter{
     }
 
 
-    private String determineSpaceBetweenSlashes(BigDecimal rootValue){
-        if (bigDecimalComparator.isValueGreaterThanCurrent(rootValue, new BigDecimal(1000))){
-            return "  ";
+    private boolean checkIfLastChildren(LinkedHashSet<Node> nodesToPrint){
+        Node first = nodesToPrint.stream().findFirst().get();
+
+        if (first.left == null && first.right == null){
+            return true;
         }
 
-        else if (bigDecimalComparator.isValueGreaterThanCurrent(rootValue, new BigDecimal(100))){
-            return "  ";
-        }
-
-        return " ";
+        return false;
     }
+
+
+//    private void determineSpaceAfterRoadJunction(BigDecimal rootValue){
+//        if (bigDecimalComparator.isValueGreaterThanCurrent(rootValue, new BigDecimal(1000))){
+//            spaceAfterRoadJunction = 5;
+//            spaceBetweenRoadJunction = 2;
+//        }
+//
+//        else if (bigDecimalComparator.isValueGreaterThanCurrent(rootValue, new BigDecimal(100))){
+//            spaceAfterRoadJunction = 3;
+//        }
+//
+//    }
 
 }

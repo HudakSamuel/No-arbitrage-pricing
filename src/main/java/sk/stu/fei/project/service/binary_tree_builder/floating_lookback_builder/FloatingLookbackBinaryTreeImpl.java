@@ -4,9 +4,7 @@ import lombok.NonNull;
 import sk.stu.fei.project.domain.AssetMovement;
 import sk.stu.fei.project.domain.AssetTree;
 import sk.stu.fei.project.domain.Node;
-import sk.stu.fei.project.domain.binary_tree.average_price.CallAverageBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.CallFloatingLookbackBinaryTree;
-import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.FloatingLookbackBinaryTree;
 import sk.stu.fei.project.domain.binary_tree.lookback.floating_lookback.PutFloatingLookbackBinaryTree;
 import sk.stu.fei.project.service.binary_tree_builder.BinaryTreeImpl;
 import sk.stu.fei.project.service.utility.BigDecimalComparator;
@@ -22,6 +20,12 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
         bigDecimalComparator = new BigDecimalComparator();
     }
 
+
+    /**
+     * Method builds binary tree for call floating lookback option
+     * @param callFloatingLookbackBinaryTree tree to build
+     * @param assetTree underlying asset tree to use
+     */
     public void buildCallFloatingLookbackBinaryTree(@NonNull CallFloatingLookbackBinaryTree callFloatingLookbackBinaryTree, @NonNull AssetTree assetTree){
         super.generateEmptyBinaryTree(callFloatingLookbackBinaryTree, assetTree.getAssetMovement().steps);
 
@@ -29,6 +33,11 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
         createNodeValuesRecursive(callFloatingLookbackBinaryTree.getRoot(), queue, assetTree.getAssetMovement());
     }
 
+    /**
+     * Method builds binary tree for put floating lookback option
+     * @param putFloatingLookbackBinaryTree tree to build
+     * @param assetTree underlying asset tree to use
+     */
     public void buildPutFloatingLookbackBinaryTree(@NonNull PutFloatingLookbackBinaryTree putFloatingLookbackBinaryTree, @NonNull AssetTree assetTree){
         super.generateEmptyBinaryTree(putFloatingLookbackBinaryTree, assetTree.getAssetMovement().steps);
 
@@ -36,6 +45,11 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
         createNodeValuesRecursive(putFloatingLookbackBinaryTree.getRoot(), queue, assetTree.getAssetMovement());
     }
 
+    /**
+     * Method creates leaf values for call floating lookback option
+     * @param assetTree underlying asset tree to use
+     * @return returns filled queue with leaf values
+     */
     private Queue<BigDecimal> createCallLeafValues(AssetTree assetTree){
         Queue<BigDecimal> queue = new LinkedList<BigDecimal>();
         addCallLeafValues(assetTree.getRoot(), queue, assetTree.getRoot().value);
@@ -43,6 +57,12 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
         return queue;
     }
 
+    /**
+     * Method traverses to the end of tree and adds to queue value to use for call floating lookback option leaf
+     * @param current current node
+     * @param queue queue to fill
+     * @param minValue current min value on path
+     */
     private void addCallLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal minValue){
         if ((current.left == null) && (current.right == null)){
 
@@ -62,6 +82,12 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
 
     }
 
+    /**
+     * Method creates leaf values from queue and then creates values for other nodes
+     * @param current current node
+     * @param queue holds values for leaves
+     * @param assetMovement necessary for calculations
+     */
     private void createNodeValuesRecursive(Node current, Queue<BigDecimal> queue, AssetMovement assetMovement){
         if ((current.left == null) && (current.right == null)){
             BigDecimal leafValue = queue.remove();
@@ -77,6 +103,11 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
     }
 
 
+    /**
+     * Method creates leaf values for put floating lookback option
+     * @param assetTree underlying asset tree to use
+     * @return returns filled queue with leaf values
+     */
     private Queue<BigDecimal> createPutLeafValues(AssetTree assetTree){
         Queue<BigDecimal> queue = new LinkedList<BigDecimal>();
         addPutLeafValues(assetTree.getRoot(), queue, assetTree.getRoot().value);
@@ -84,6 +115,12 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
         return queue;
     }
 
+    /**
+     * Method traverses to the end of tree and adds to queue value to use for put floating lookback option leaf
+     * @param current current node
+     * @param queue queue to fill
+     * @param maxValue current max value on path
+     */
     private void addPutLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal maxValue){
         if ((current.left == null) && (current.right == null)){
 

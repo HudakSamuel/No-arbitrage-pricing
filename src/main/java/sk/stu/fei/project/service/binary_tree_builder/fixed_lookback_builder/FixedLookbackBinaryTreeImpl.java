@@ -21,6 +21,11 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
         bigDecimalComparator = new BigDecimalComparator();
     }
 
+    /**
+     * Method builds binary tree for call fixed lookback option
+     * @param callFixedLookbackBinaryTree tree to build
+     * @param assetTree underlying asset tree to use
+     */
     public void buildCallFixedLookbackBinaryTree(@NonNull CallFixedLookbackBinaryTree callFixedLookbackBinaryTree, @NonNull AssetTree assetTree){
         super.generateEmptyBinaryTree(callFixedLookbackBinaryTree, assetTree.getAssetMovement().steps);
 
@@ -28,6 +33,12 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
         createNodeValuesRecursive(callFixedLookbackBinaryTree.getRoot(), queue, assetTree.getAssetMovement());
     }
 
+
+    /**
+     * Method builds binary tree for call fixed lookback option
+     * @param putFixedLookbackBinaryTree tree to build
+     * @param assetTree underlying asset tree to use
+     */
     public void buildPutFixedLookbackBinaryTree(@NonNull PutFixedLookbackBinaryTree putFixedLookbackBinaryTree, @NonNull AssetTree assetTree){
         super.generateEmptyBinaryTree(putFixedLookbackBinaryTree, assetTree.getAssetMovement().steps);
 
@@ -35,6 +46,12 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
         createNodeValuesRecursive(putFixedLookbackBinaryTree.getRoot(), queue, assetTree.getAssetMovement());
     }
 
+    /**
+     * Method creates leaf values for call fixed lookback option
+     * @param assetTree underlying asset tree to use
+     * @param strikePrice strike price of option
+     * @return returns filled queue with values for leaves
+     */
     private Queue<BigDecimal> createCallLeafValues(AssetTree assetTree, BigDecimal strikePrice){
         Queue<BigDecimal> queue = new LinkedList<BigDecimal>();
         addCallLeafValues(assetTree.getRoot(), queue, assetTree.getRoot().value, strikePrice);
@@ -42,6 +59,13 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
         return queue;
     }
 
+    /**
+     * Method determines max value on path and adds it to queue
+     * @param current current node
+     * @param queue holds max values
+     * @param maxValue current max value
+     * @param strikePrice strike price of option
+     */
     private void addCallLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal maxValue, BigDecimal strikePrice){
         if (bigDecimalComparator.isValueGreaterThanCurrent(current.value, maxValue)){
             maxValue = current.value;
@@ -63,6 +87,12 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
 
     }
 
+    /**
+     * Method uses queue to assign values to leaves and then creates values for other nodes
+     * @param current current node
+     * @param queue holds leaf values
+     * @param assetMovement necessary for calculations
+     */
     private void createNodeValuesRecursive(Node current, Queue<BigDecimal> queue, AssetMovement assetMovement){
         if ((current.left == null) && (current.right == null)){
             BigDecimal leafValue = queue.remove();
@@ -77,6 +107,12 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
     }
 
 
+    /**
+     * Method creates leaf values for put fixed lookback option
+     * @param assetTree underlying asset tree to use
+     * @param strikePrice strike price of option
+     * @return returns filled queue with values for leaves
+     */
     private Queue<BigDecimal> createPutLeafValues(AssetTree assetTree, BigDecimal strikePrice){
         Queue<BigDecimal> queue = new LinkedList<BigDecimal>();
         addPutLeafValues(assetTree.getRoot(), queue, assetTree.getRoot().value, strikePrice);
@@ -84,6 +120,13 @@ public class FixedLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fixed
         return queue;
     }
 
+    /**
+     * Method determines min value on path and adds it to queue
+     * @param current current node
+     * @param queue holds min values
+     * @param minValue current min value
+     * @param strikePrice strike price of option
+     */
     private void addPutLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal minValue, BigDecimal strikePrice){
         if (bigDecimalComparator.isValueSmallerThanCurrent(current.value, minValue)){
             minValue = current.value;

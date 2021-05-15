@@ -11,10 +11,21 @@ import java.math.MathContext;
 public abstract class BinaryTreeImpl implements BinaryTreeService {
     MathContext precision = new MathContext(20);
 
+    /**
+     * Method generates empty tree by setting node values to 0
+     * @param optionBinaryTree optionBinaryTree to generate values on
+     * @param maxDepth height of the tree
+     */
     protected void generateEmptyBinaryTree(OptionBinaryTree optionBinaryTree, int maxDepth){
         createChildrenRecursive(optionBinaryTree.getRoot(), 1, maxDepth);
     }
 
+    /**
+     * Method creates children nodes with value 0 by repeatedly calling itself
+     * @param current current node to create children from
+     * @param depth current depth in tree
+     * @param maxDepth max available depth to traverse to
+     */
     private void createChildrenRecursive(Node current, int depth, int maxDepth){
         current.left = new Node(new BigDecimal(0));
         current.right = new Node(new BigDecimal(0));
@@ -25,6 +36,12 @@ public abstract class BinaryTreeImpl implements BinaryTreeService {
         }
     }
 
+    /**
+     * Method calculates current node value based on risk-neutral probability and values of children
+     * @param current node to calculate value for
+     * @param assetMovement holds parameters to use for calculation
+     * @return returns value of node
+     */
     protected BigDecimal calculateNodeValue(Node current, AssetMovement assetMovement){
         BigDecimal nodeValueUp = current.left.value;
         BigDecimal nodeValueDown = current.right.value;
