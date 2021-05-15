@@ -7,8 +7,8 @@ public class AssetMovementImpl implements AssetMovementService{
     java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
 
     public boolean initAssetMovementParameters(@NonNull AssetMovement assetMovement){
+        createAndSetT(assetMovement);
         if (isArbitrageConditionMet(assetMovement)){
-            createAndSetT(assetMovement);
             createAndSetUpAndDownModifiers(assetMovement);
             createAndSetProbability(assetMovement);
 

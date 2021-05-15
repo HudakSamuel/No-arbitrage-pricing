@@ -68,7 +68,7 @@ public class Init {
                     optionTreePrinter.print(callFloatingLookbackBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + callFloatingLookbackBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + callFloatingLookbackBinaryTree.getRoot().value);
                 break;
 
             case 2:
@@ -81,7 +81,7 @@ public class Init {
                     optionTreePrinter.print(putFloatingLookbackBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + putFloatingLookbackBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + putFloatingLookbackBinaryTree.getRoot().value);
                 break;
 
             case 3:
@@ -93,7 +93,7 @@ public class Init {
                     optionTreePrinter.print(callFixedLookbackBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + callFixedLookbackBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + callFixedLookbackBinaryTree.getRoot().value);
 
 
             case 4:
@@ -105,7 +105,7 @@ public class Init {
                     optionTreePrinter.print(putFixedLookbackBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + putFixedLookbackBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + putFixedLookbackBinaryTree.getRoot().value);
                 break;
 
             case 5:
@@ -117,7 +117,7 @@ public class Init {
                     optionTreePrinter.print(callAverageBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + callAverageBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + callAverageBinaryTree.getRoot().value);
                 break;
 
             case 6:
@@ -129,7 +129,7 @@ public class Init {
                     optionTreePrinter.print(putAverageBinaryTree);
                 }
 
-                System.out.println("Current price of the option is: " + putAverageBinaryTree.getRoot().value);
+                System.out.println("Present price of the option is: " + putAverageBinaryTree.getRoot().value);
                 break;
         }
 
