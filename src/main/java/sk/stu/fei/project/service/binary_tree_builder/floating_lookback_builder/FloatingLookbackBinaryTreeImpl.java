@@ -64,6 +64,10 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
      * @param minValue current min value on path
      */
     private void addCallLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal minValue){
+        if (bigDecimalComparator.isValueSmallerThanCurrent(current.value, minValue)){
+            minValue = current.value;
+        }
+
         if ((current.left == null) && (current.right == null)){
 
             BigDecimal subtracted = current.value.subtract(minValue);
@@ -71,10 +75,6 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
             queue.add(optionLeafValue);
 
             return;
-        }
-
-        if (bigDecimalComparator.isValueSmallerThanCurrent(current.value, minValue)){
-            minValue = current.value;
         }
 
         addCallLeafValues(current.left, queue, minValue);
@@ -122,6 +122,10 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
      * @param maxValue current max value on path
      */
     private void addPutLeafValues(Node current, Queue<BigDecimal> queue, BigDecimal maxValue){
+        if (bigDecimalComparator.isValueGreaterThanCurrent(current.value, maxValue)){
+            maxValue = current.value;
+        }
+
         if ((current.left == null) && (current.right == null)){
 
             BigDecimal subtracted = maxValue.subtract(current.value);
@@ -129,10 +133,6 @@ public class FloatingLookbackBinaryTreeImpl extends BinaryTreeImpl implements Fl
             queue.add(optionLeafValue);
 
             return;
-        }
-
-        if (bigDecimalComparator.isValueGreaterThanCurrent(current.value, maxValue)){
-            maxValue = current.value;
         }
 
         addPutLeafValues(current.left, queue, maxValue);

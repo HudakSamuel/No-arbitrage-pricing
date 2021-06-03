@@ -196,7 +196,7 @@ public class Init {
             try{
                 System.out.println("Enter starting price of underlying asset: ");
                 double number = input.nextDouble();
-                if (number < 0){
+                if (number < 0 || number > 9999){
                     throw new Exception();
                 }
 
@@ -376,6 +376,10 @@ public class Init {
             try{
 
                 double vola = Double.parseDouble(volatility);
+
+                if (vola <= 0 || vola > 9){
+                    throw new Exception();
+                }
                 result = vola;
 
                 validInput = true;
@@ -404,6 +408,11 @@ public class Init {
             String interest = input.next();
             try {
                 double inter = Double.parseDouble(interest);
+
+                if (inter < 0){
+                    throw new Exception();
+                }
+
                 result = inter;
 
                 validInput = true;

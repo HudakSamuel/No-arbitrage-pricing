@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact name="No-arbitrage pricing:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/No_arbitrage_pricing_jar</output-path>
+    <root id="root">
+      <element id="archive" name="No-arbitrage_pricing.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="No-arbitrage pricing" />
+      </element>
+      <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.12" />
+      <element id="library" level="project" name="Maven: ch.obermuhlner:big-math:2.3.0" />
+      <element id="library" level="project" name="Maven: jline:jline:2.14.2" />
+    </root>
+  </artifact>
+</component>

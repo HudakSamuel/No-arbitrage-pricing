@@ -44,8 +44,6 @@ public class AssetMovementImpl implements AssetMovementService{
         boolean firstPart = bigDecimalComparator.isValueSmallerThanCurrent(vol, assetMovement.interest.multiply(BigDecimalMath.sqrt(assetMovement.T, precision)));
         boolean secondPart = bigDecimalComparator.isValueSmallerThanCurrent(assetMovement.interest.multiply(BigDecimalMath.sqrt(assetMovement.T, precision)), assetMovement.volatility);
 
-        logger.info(String.valueOf(firstPart));
-        logger.info(String.valueOf(secondPart));
         return firstPart && secondPart;
     }
 
